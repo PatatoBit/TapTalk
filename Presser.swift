@@ -30,6 +30,7 @@ struct Presser: View {
                 )
         }
         .buttonStyle(.borderedProminent)
+        .buttonBorderShape(.roundedRectangle(radius: 0))
         .foregroundStyle(.blue)
         .simultaneousGesture(LongPressGesture(minimumDuration: 0.1)
             .onEnded({ _ in
