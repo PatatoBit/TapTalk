@@ -16,18 +16,26 @@ struct ContentView: View {
     var body: some View {
         VStack {
             VStack {
-                HStack {
-                    ForEach(morseStrings, id:\.self) { morse in
-                        Text("\(morse)")
-                    }
-                }
+//                ScrollView(.horizontal) {
+//                    ScrollViewReader { proxy in
+//                        HStack {
+//                            ForEach(morseStrings, id:\.self) { morse in
+//                                Text("\(morse)").font(.largeTitle)
+//                            }
+//                            .onChange(of: morseStrings.count) { _ in
+//                                proxy.scrollTo(morseStrings.count - 1)
+//                            }
+//                        }
+//                    }
+//                }
+                
+                Text("\(morseStrings)")
             } // VStack
             .frame(
                 maxWidth: .infinity,
                 maxHeight: .infinity,
                 alignment: .center
             )
-            .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             
             Spacer()
             
@@ -41,5 +49,6 @@ struct ContentView: View {
             )
             
         } // Main VStack
+        .padding(20)
     }
 }
