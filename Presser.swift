@@ -8,7 +8,7 @@ struct Presser: View {
     @State private var lastTime = CFAbsoluteTimeGetCurrent()
     
     let timeBetweenLetters: Double = 1.0
-    let timeBetweenWords: Double = 3.0
+    let timeBetweenWords: Double = 3
     let autoAppendCheckInterval: Double = 0.1 // Interval to check
     
     // Timer to auto-append current letter or word
@@ -34,6 +34,7 @@ struct Presser: View {
         currentLetter += morse // Continue appending to the current letter
         lastTime = currentTime // Update the last press time
     }
+    
     
     // Automatically append the letter or word based on the timing
     func autoAppendCurrentLetterOrWord() {

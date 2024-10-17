@@ -11,49 +11,43 @@ struct morseState {
 }
 
 struct ContentView: View {
-    @State var words: [[String]] = []
+    @State var words: [[String]] = [
+        [".._", "._."],
+        [".._", "._."],
+        [".._", "._."],
+        [".._", "._."]
+    ]
+    
     @State var currentLetter = ""
     
     var body: some View {
         VStack {
             VStack {
                 ScrollView(.horizontal) {
-                    ScrollViewReader { proxy in
-                        HStack(spacing: 30) {
-                            ForEach(words, id:\.self) { word in
-                                HStack(spacing: 3) {
-                                    ForEach(word, id:\.self) { letter in
-                                        Text(" \(translateMorseToLetter(letter))")
-                                            .font(.largeTitle).bold()
-                                    }
-                                    
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                Text("\(currentLetter)")
-                
-                HStack {
-                    ForEach(words, id:\.self) { word in
-                        HStack {
-                            ForEach(word, id:\.self) { letter in
-                                if letter != "" {
-                                    Text("\(letter)")
-                                        .font(.title)
-                                        .bold()
-                                        .foregroundStyle(.white)
-                                } else {
-                                    Text(" \(currentLetter)")
-                                }
-                            }
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(RoundedRectangle(cornerRadius: 20).fill(.pink))
+                    ScrollViewReader { value in
                         
-                    }
+                        HStack(spacing: 60) {
+                            ForEach(words.indices, id: \.self) { index in
+                                HStack(spacing: 10) {
+                                    ForEach(words[index], id:\.self) { letter in
+                                        VStack {
+                                            Text("\(translateMorseToLetter(letter))")
+                                                .font(.title)
+                                                .bold()
+                                            
+                                            Text("\(letter)")
+                                        }
+                                    }
+                                } // Letters HStack
+                                .id(index) // Add id to each word to allow scrolling
+                            }
+                        } // Words HStack
+                        .onChange(of: words.count) { _ in
+                            // Scroll to the last word
+                            value.scrollTo(words.count - 1, anchor: .center)
+                        }
+                        
+                    } // ScrollViewReader
                 }
                 
             } // VStack

@@ -5,8 +5,6 @@
 //  Created by Pat on 17/10/2567 BE.
 //
 
-import Foundation
-
 let morseCodeDict: [String: String] = [
     "._": "A", "_...": "B", "_._.": "C", "_..": "D", ".": "E",
     ".._.": "F", "__.": "G", "....": "H", "..": "I", ".___": "J",
@@ -16,7 +14,6 @@ let morseCodeDict: [String: String] = [
     "__..": "Z", "_____": "0", ".____": "1", "..___": "2", "...__": "3",
     "...._": "4", ".....": "5", "_....": "6", "__...": "7", "___..": "8", "____.": "9"
 ]
-
 
 func translateMorseToLetter(_ morseString: String) -> String {
     return morseCodeDict[morseString] ?? "?" // Return "?" if not found
