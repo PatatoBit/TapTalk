@@ -33,8 +33,29 @@ struct ContentView: View {
                     }
                 }
                 
-                Text("\(words)")
-                Text(" \(currentLetter)")
+                Text("\(currentLetter)")
+                
+                HStack {
+                    ForEach(words, id:\.self) { word in
+                        HStack {
+                            ForEach(word, id:\.self) { letter in
+                                if letter != "" {
+                                    Text("\(letter)")
+                                        .font(.title)
+                                        .bold()
+                                        .foregroundStyle(.white)
+                                } else {
+                                    Text(" \(currentLetter)")
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 10)
+                        .background(RoundedRectangle(cornerRadius: 20).fill(.pink))
+                        
+                    }
+                }
+                
             } // VStack
             .frame(
                 maxWidth: .infinity,

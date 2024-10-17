@@ -67,6 +67,10 @@ struct Presser: View {
     
     var body: some View {
         VStack {
+            Button("Reset", systemImage: "arrow.trianglehead.counterclockwise.rotate.90") {
+                words = []
+            }
+            
             Button {
                 if self.state.state == .holded {
                     // Long press detected (for "_")
