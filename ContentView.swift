@@ -11,12 +11,7 @@ struct morseState {
 }
 
 struct ContentView: View {
-    @State var words: [[String]] = [
-        [".._", "._."],
-        [".._", "._."],
-        [".._", "._."],
-        [".._", "._."]
-    ]
+    @State var words: [[String]] = []
     
     @State var currentLetter = ""
     
