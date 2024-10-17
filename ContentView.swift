@@ -11,25 +11,30 @@ struct morseState {
 }
 
 struct ContentView: View {
-    @State var morseStrings: [String] = []
+    @State var words: [[String]] = []
+    @State var currentLetter = ""
     
     var body: some View {
         VStack {
             VStack {
-//                ScrollView(.horizontal) {
-//                    ScrollViewReader { proxy in
-//                        HStack {
-//                            ForEach(morseStrings, id:\.self) { morse in
-//                                Text("\(morse)").font(.largeTitle)
-//                            }
-//                            .onChange(of: morseStrings.count) { _ in
-//                                proxy.scrollTo(morseStrings.count - 1)
-//                            }
-//                        }
-//                    }
-//                }
+                ScrollView(.horizontal) {
+                    ScrollViewReader { proxy in
+                        HStack(spacing: 30) {
+                            ForEach(words, id:\.self) { word in
+                                HStack(spacing: 3) {
+                                    ForEach(word, id:\.self) { letter in
+                                        Text(" \(translateMorseToLetter(letter))")
+                                            .font(.largeTitle).bold()
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
                 
-                Text("\(morseStrings)")
+                Text("\(words)")
+                Text(" \(currentLetter)")
             } // VStack
             .frame(
                 maxWidth: .infinity,
@@ -40,7 +45,7 @@ struct ContentView: View {
             Spacer()
             
             VStack {
-                Presser(morseStrings: $morseStrings)
+                Presser(words: $words, currentLetter: $currentLetter)
             } // VStack
             .frame(
                 maxWidth: .infinity,
