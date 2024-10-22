@@ -22,9 +22,9 @@ struct MorseLetter: View {
             Text("\(morseLetter)")
                 .bold()
                 .foregroundStyle(.white)
-                .padding(.horizontal, 10)
+                .padding(.horizontal, 15)
                 .padding(.vertical, 5)
-                .background(RoundedRectangle(cornerRadius: 10).fill(.black))
+                .background(RoundedRectangle(cornerRadius: 20).fill(Color("Primary")))
                 .opacity(isVisible ? 1 : 0) // Animate the opacity of the letter
                 .animation(.easeInOut(duration: 0.5), value: isVisible)
         }

@@ -22,28 +22,26 @@ struct ContentView: View {
                         HStack(spacing: 60) {
                             ForEach(words.indices, id: \.self) { wordIndex in
                                 HStack(spacing: 10) {
-                                    ForEach(words[wordIndex], id: \.self) { letter in
-                                        MorseLetter(morseLetter: letter)
+                                    ForEach(words[wordIndex].indices, id: \.self) { letterIndex in
+                                        MorseLetter(morseLetter: words[wordIndex][letterIndex])
+                                            .id("\(wordIndex)-\(letterIndex)") // Assign unique ID for each letter
                                     }
                                     
                                     // Add blinking cursor next to the last letter of the current word
                                     if wordIndex == words.count - 1 {
-                                        MorsePreview(currentMorse: $currentLetter)
+                                        MorsePreview(currentMorse: $currentLetter).id("preview")
                                     }
                                 } // Letters HStack
-                                .id(wordIndex) // Add id to each word to allow scrolling
                             }
-                        } // VStack
-                        .onChange(of: words.count) { _ in
-                            // Scroll to the last word
-                            value.scrollTo(words.count - 1, anchor: .center)
+                        } // HStack
+                        .onChange(of: words) { _ in
+                            // Scroll to the last letter of the last word
+                            withAnimation {
+                                value.scrollTo("preview", anchor: .trailing)
+                            }
                         }
-                    } // Words HStack
-                } // ScrollViewReader
-                
-                Spacer()
-                
-//                MorsePreview(currentMorse: $currentLetter)
+                    } // ScrollViewReader
+                } // ScrollView
             } // VStack
             .frame(
                 maxWidth: .infinity,
@@ -66,6 +64,9 @@ struct ContentView: View {
         .onAppear {
             startBlinkingCursor()
         }
+        .background(
+            Color("Background").ignoresSafeArea()
+        )
     }
     
     // Timer to toggle the blinking cursor

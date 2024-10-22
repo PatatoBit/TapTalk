@@ -69,7 +69,7 @@ struct Presser: View {
     var body: some View {
         VStack {
             Button("Reset", systemImage: "arrow.trianglehead.counterclockwise.rotate.90") {
-                words = []
+                words = [[]]
             }
             
             Button {
