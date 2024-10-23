@@ -9,7 +9,9 @@ import SwiftUI
 
 struct LessonsView: View {
     var body: some View {
-        Text("Lessons")
+        VStack {
+            Text("Lessons")
+        }
     }
 }
 

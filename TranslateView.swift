@@ -1,5 +1,6 @@
 import SwiftUI
 
+
 struct morseState {
     enum State {
         case pressed
