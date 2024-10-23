@@ -9,7 +9,7 @@ struct morseState {
     var state: State = .inactive
 }
 
-struct ContentView: View {
+struct TranslateView: View {
     @State var words: [[String]] = [[]] // Stores the words and letters
     @State var currentLetter = ""
     @State private var showBlinkingCursor: Bool = true // Controls the blinking effect
@@ -64,9 +64,6 @@ struct ContentView: View {
         .onAppear {
             startBlinkingCursor()
         }
-        .background(
-            Color("Background").ignoresSafeArea()
-        )
     }
     
     // Timer to toggle the blinking cursor
