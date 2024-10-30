@@ -13,7 +13,7 @@ struct MorsePreview: View {
     
     var body: some View {
         VStack {
-            Text("\(translateMorseToLetter(currentMorse))")
+            Text("\(morseToLetter(currentMorse))")
                 .font(.title)
                 .bold()
                 .opacity(isVisible ? 1 : 0) // Animate the opacity of the letter

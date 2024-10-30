@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct morseState {
     enum State {
         case pressed
@@ -66,6 +65,8 @@ struct TranslateView: View {
             startBlinkingCursor()
         }
     }
+    
+   
     
     // Timer to toggle the blinking cursor
     func startBlinkingCursor() {

@@ -15,6 +15,6 @@ let morseCodeDict: [String: String] = [
     "...._": "4", ".....": "5", "_....": "6", "__...": "7", "___..": "8", "____.": "9"
 ]
 
-func translateMorseToLetter(_ morseString: String) -> String {
+func morseToLetter(_ morseString: String) -> String {
     return morseCodeDict[morseString] ?? "?" // Return "?" if not found
 }

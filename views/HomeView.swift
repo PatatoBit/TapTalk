@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Text("TapTalk").font(.largeTitle).bold()
                 Text("learn and communicate by tapping")

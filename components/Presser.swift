@@ -4,8 +4,10 @@ struct Presser: View {
     @Binding var words: [[String]]
     @Binding var currentLetter: String
     
+    var readAloud: Bool = true
     @State private var state: morseState = morseState(state: .inactive)
     @State private var lastTime = CFAbsoluteTimeGetCurrent()
+    
     
     let timeBetweenLetters: Double = 1.0
     let timeBetweenWords: Double = 3
@@ -27,6 +29,7 @@ struct Presser: View {
                 } else {
                     words.append([currentLetter]) // Start a new word if none exists
                 }
+                
                 currentLetter = ""
             }
         }
@@ -39,38 +42,42 @@ struct Presser: View {
     // Automatically append the letter or word based on the timing
     func autoAppendCurrentLetterOrWord() {
         let currentTime = CFAbsoluteTimeGetCurrent()
+        let isTimeForNewLetter = currentTime - lastTime > timeBetweenLetters
+        let isTimeForNewWord = currentTime - lastTime > timeBetweenWords
         
-        // Append the letter if time between letters has passed
-        if currentTime - lastTime > timeBetweenLetters && !currentLetter.isEmpty {
-            if let lastWordIndex = words.indices.last {
-                words[lastWordIndex].append(currentLetter)
-            } else {
+        // Append the current letter to the latest word if enough time has passed
+        if isTimeForNewLetter, !currentLetter.isEmpty {
+            if words.isEmpty {
                 words.append([currentLetter])
+            } else {
+                words[words.count - 1].append(currentLetter)
             }
-            currentLetter = "" // Clear current letter after appending
+            speak(text: "Letter \(morseToLetter(currentLetter))")
+            currentLetter = "" // Reset after appendig
         }
         
-        // If time between words has passed, end the current word and start a new one
-        if currentTime - lastTime > timeBetweenWords {
+        // Start a new word if the word gap time has passed
+        if isTimeForNewWord, let lastWord = words.last, !lastWord.isEmpty {
             if !currentLetter.isEmpty {
-                // Append the current letter to the current word before ending the word
-                if let lastWordIndex = words.indices.last {
-                    words[lastWordIndex].append(currentLetter)
-                }
-                currentLetter = "" // Clear current letter
+                words[words.count - 1].append(currentLetter)
+                currentLetter = "" // Reset after appending
             }
-            if let lastWord = words.last, !lastWord.isEmpty {
-                // Only start a new word array if the last word was not empty
-                words.append([])
-            }
+            
+            let completedWord = words.last?.compactMap { morseToLetter($0) }.joined() ?? ""
+                   speak(text: "\(completedWord)", language: "en-US")
+            words.append([]) // Begin new word
         }
     }
     
+    
+    
     var body: some View {
         VStack {
+            
             Button("Reset", systemImage: "arrow.trianglehead.counterclockwise.rotate.90") {
                 words = [[]]
             }
+            
             
             Button {
                 if self.state.state == .holded {
