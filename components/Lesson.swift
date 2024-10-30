@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct Lesson: View {
+    var letters: [String]
+    var words: [String]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("\(letters)")
+        Text("\(words)")
     }
 }
 
 #Preview {
-    Lesson()
+    Lesson(letters: ["e", "t"], words: ["tee", "ette"])
 }

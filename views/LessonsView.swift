@@ -15,7 +15,7 @@ struct LessonsView: View {
             List {
                 ForEach(lessons) { lesson in
                     NavigationLink {
-                        Lesson()
+                        Lesson(letters: lesson.letters, words: lesson.words)
                     } label: {
                         Text("\(lesson.name)")
                     }
