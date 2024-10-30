@@ -11,9 +11,12 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("TapTalk").font(.largeTitle).bold()
-                Text("learn and communicate by tapping")
-                
+                Image("macalert")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal, 100)
+                    .padding(.top, 100)
+
                 Spacer()
                 
                 HStack {

@@ -12,6 +12,8 @@ struct LessonsView: View {
     
     var body: some View {
         VStack {
+            Text("Lessons").font(.title)
+            
             List {
                 ForEach(lessons) { lesson in
                     NavigationLink {

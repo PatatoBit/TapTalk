@@ -43,22 +43,14 @@ struct TranslateView: View {
                     } // ScrollViewReader
                 } // ScrollView
             } // VStack
-            .frame(
-                maxWidth: .infinity,
-                maxHeight: .infinity,
-                alignment: .center
-            )
+            .fullFrameCentered()
             
             Spacer()
             
             VStack {
                 Presser(words: $words, currentLetter: $currentLetter)
             } // VStack
-            .frame(
-                maxWidth: .infinity,
-                maxHeight: .infinity,
-                alignment: .center
-            )
+            .fullFrameCentered()
         } // Main VStack
         .padding(20)
         .onAppear {
